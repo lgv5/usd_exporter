@@ -14,15 +14,6 @@
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
-const parseMoney = (value) => {
-  const matches = value.match(/^(0|[1-9][0-9]*),([0-9]{2})$/);
-
-  if (matches === null)
-      throw new Error(`invalid number: ${value}`);
-
-  return Number.parseFloat(`${matches[1]}.${matches[2]}`);
-}
-
 export class AmbitoProvider {
   #base_url = 'https://mercados.ambito.com';
   #subtype;
@@ -44,10 +35,23 @@ export class AmbitoProvider {
         return undefined;
       }
 
-      return {buy: parseMoney(data.compra), sell: parseMoney(data.venta)};
+      return {
+        buy: this.#parseValue(data.compra),
+        sell: this.#parseValue(data.venta),
+      };
     } catch (e) {
       console.log(`error: ${e}`);
       return undefined;
     }
   }
+
+  #parseValue(value) {
+    const matches = value.match(/^(0|[1-9][0-9]*),([0-9]{2})$/);
+
+    if (matches === null)
+        throw new Error(`invalid number: ${value}`);
+
+    return Number.parseFloat(`${matches[1]}.${matches[2]}`);
+  }
+
 }
