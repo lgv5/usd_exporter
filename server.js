@@ -2,8 +2,11 @@ import express from 'express';
 import { Gauge, collectDefaultMetrics, register } from 'prom-client';
 import { AmbitoProvider } from './providers.js';
 
-const port = process.env.EXPORTER_PORT || 29000;
-const interval = process.env.EXPORTER_INTERVAL || (60 * 1000);
+process.title = process.env.npm_package_name || 'usd_exporter';
+
+const port = process.env.npm_package_config_port || 29000;
+const interval = process.env.npm_package_config_interval ||
+  (60 * 1000);
 
 const usd_ars_rate = new Gauge({
   name: 'usd_ars_rate',

@@ -1,14 +1,21 @@
 {
   "name": "usd_exporter",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "USD-ARS exchange rate exporter",
+  "main": "server.js",
   "scripts": {
-    "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "config": {
+    "interval": 60000,
+    "port": 29000
+  },
   "type": "module",
-  "author": "",
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@github.com/lgv5/usd_exporter.git"
+  },
+  "author": "Lucas <lucas@lgv5.net>",
   "license": "ISC",
   "dependencies": {
     "express": "^4.18.2",
