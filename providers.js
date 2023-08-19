@@ -14,8 +14,6 @@
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
-const BASE_URL = 'https://mercados.ambito.com';
-
 const parseMoney = (value) => {
   const matches = value.match(/^(0|[1-9][0-9]*),([0-9]{2})$/);
 
@@ -26,6 +24,7 @@ const parseMoney = (value) => {
 }
 
 export class AmbitoProvider {
+  #base_url = 'https://mercados.ambito.com';
   #subtype;
   #endpoint;
 
@@ -35,7 +34,7 @@ export class AmbitoProvider {
   }
 
   async price() {
-    const response = await fetch(`${BASE_URL}${this.#endpoint}`);
+    const response = await fetch(`${this.#base_url}${this.#endpoint}`);
 
     try {
       const data = await response.json();
