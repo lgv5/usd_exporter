@@ -35,9 +35,12 @@ export class AmbitoProvider {
         return undefined;
       }
 
+      var [DD, MM, YY, HH, mm] = data.fecha.split((/[\\/\-_:_]+/))
+      var date = Date.UTC(YY, MM, DD, HH, mm)
       return {
         buy: this.#parseValue(data.compra),
         sell: this.#parseValue(data.venta),
+        lastUpdate: date,
       };
     } catch (e) {
       console.log(`error: ${e}`);

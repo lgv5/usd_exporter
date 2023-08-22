@@ -53,6 +53,11 @@ for (const [subtype, provider] of Object.entries(providers)) {
       subtype: subtype,
       operation: 'sell',
     }, price.sell);
+    usd_ars_rate.set({
+      provider: 'Ambito',
+      subtype: subtype,
+      operation: 'lastUpdate',
+    }, price.lastUpdate);
   };
 
   setImmediate(f);
