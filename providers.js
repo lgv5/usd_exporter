@@ -39,6 +39,7 @@ export class AmbitoProvider {
       return {
         buy: this.#parseValue(data.compra),
         sell: this.#parseValue(data.venta),
+        lastUpdate: 'fecha' in data ? data.fecha : 'n/a',
       };
     } catch (e) {
       console.log(`error: ${e}`);

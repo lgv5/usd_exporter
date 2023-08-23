@@ -27,7 +27,7 @@ const interval = process.env.npm_package_config_interval ||
 const usd_ars_rate = new Gauge({
   name: 'usd_ars_rate',
   help: 'USD ARS rate',
-  labelNames: ['provider', 'subtype', 'operation'],
+  labelNames: ['provider', 'subtype', 'last_update', 'operation'],
 });
 
 const providers = {
@@ -43,16 +43,14 @@ for (const [subtype, provider] of Object.entries(providers)) {
     if (price === undefined)
       return;
 
-    usd_ars_rate.set({
+    const labelset = {
       provider: provider.name,
       subtype: subtype,
-      operation: 'buy',
-    }, price.buy);
-    usd_ars_rate.set({
-      provider: provider.name,
-      subtype: subtype,
-      operation: 'sell',
-    }, price.sell);
+      last_update: price.lastUpdate,
+    };
+
+    usd_ars_rate.set({...labelset, operation: 'buy'}, price.buy);
+    usd_ars_rate.set({...labelset, operation: 'sell'}, price.sell);
   };
 
   setImmediate(f);
