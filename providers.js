@@ -15,6 +15,7 @@
  */
 
 export class AmbitoProvider {
+  name = 'Ámbito';
   #base_url = 'https://mercados.ambito.com';
   #subtype;
   #endpoint;

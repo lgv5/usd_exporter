@@ -44,12 +44,12 @@ for (const [subtype, provider] of Object.entries(providers)) {
       return;
 
     usd_ars_rate.set({
-      provider: 'Ámbito',
+      provider: provider.name,
       subtype: subtype,
       operation: 'buy',
     }, price.buy);
     usd_ars_rate.set({
-      provider: 'Ámbito',
+      provider: provider.name,
       subtype: subtype,
       operation: 'sell',
     }, price.sell);
